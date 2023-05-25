@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sudoku Solver</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+			padding:5px;
+			padding-right:10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+			border: none;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        button {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+		
+		.centertab{
+			align: center;
+		}
+    </style>
+</head>
+<body>
+    <h1>Sudoku Solver</h1>
+        <table id="sudokuTable" class="centertab">
+        <tbody>
+            <!-- Rows 1-9 -->
+            <tr>
+                <td><input type="text" id="cell00" maxlength="1"></td>
+                <td><input type="text" id="cell01" maxlength="1"></td>
+                <td><input type="text" id="cell02" maxlength="1"></td>
+                <td><input type="text" id="cell03" maxlength="1"></td>
+                <td><input type="text" id="cell04" maxlength="1"></td>
+                <td><input type="text" id="cell05" maxlength="1"></td>
+                <td><input type="text" id="cell06" maxlength="1"></td>
+                <td><input type="text" id="cell07" maxlength="1"></td>
+                <td><input type="text" id="cell08" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell10" maxlength="1"></td>
+                <td><input type="text" id="cell11" maxlength="1"></td>
+                <td><input type="text" id="cell12" maxlength="1"></td>
+                <td><input type="text" id="cell13" maxlength="1"></td>
+                <td><input type="text" id="cell14" maxlength="1"></td>
+                <td><input type="text" id="cell15" maxlength="1"></td>
+                <td><input type="text" id="cell16" maxlength="1"></td>
+                <td><input type="text" id="cell17" maxlength="1"></td>
+                <td><input type="text" id="cell18" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell20" maxlength="1"></td>
+                <td><input type="text" id="cell21" maxlength="1"></td>
+                <td><input type="text" id="cell22" maxlength="1"></td>
+                <td><input type="text" id="cell23" maxlength="1"></td>
+                <td><input type="text" id="cell24" maxlength="1"></td>
+                <td><input type="text" id="cell25" maxlength="1"></td>
+                <td><input type="text" id="cell26" maxlength="1"></td>
+                <td><input type="text" id="cell27" maxlength="1"></td>
+                <td><input type="text" id="cell28" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell30" maxlength="1"></td>
+                <td><input type="text" id="cell31" maxlength="1"></td>
+                <td><input type="text" id="cell32" maxlength="1"></td>
+                <td><input type="text" id="cell33" maxlength="1"></td>
+                <td><input type="text" id="cell34" maxlength="1"></td>
+                <td><input type="text" id="cell35" maxlength="1"></td>
+                <td><input type="text" id="cell36" maxlength="1"></td>
+                <td><input type="text" id="cell37" maxlength="1"></td>
+                <td><input type="text" id="cell38" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell40" maxlength="1"></td>
+                <td><input type="text" id="cell41" maxlength="1"></td>
+                <td><input type="text" id="cell42" maxlength="1"></td>
+                <td><input type="text" id="cell43" maxlength="1"></td>
+                <td><input type="text" id="cell44" maxlength="1"></td>
+                <td><input type="text" id="cell45" maxlength="1"></td>
+                <td><input type="text" id="cell46" maxlength="1"></td>
+                <td><input type="text" id="cell47" maxlength="1"></td>
+                <td><input type="text" id="cell48" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell50" maxlength="1"></td>
+                <td><input type="text" id="cell51" maxlength="1"></td>
+                <td><input type="text" id="cell52" maxlength="1"></td>
+                <td><input type="text" id="cell53" maxlength="1"></td>
+                <td><input type="text" id="cell54" maxlength="1"></td>
+                <td><input type="text" id="cell55" maxlength="1"></td>
+                <td><input type="text" id="cell56" maxlength="1"></td>
+                <td><input type="text" id="cell57" maxlength="1"></td>
+                <td><input type="text" id="cell58" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell60" maxlength="1"></td>
+                <td><input type="text" id="cell61" maxlength="1"></td>
+                <td><input type="text" id="cell62" maxlength="1"></td>
+                <td><input type="text" id="cell63" maxlength="1"></td>
+                <td><input type="text" id="cell64" maxlength="1"></td>
+                <td><input type="text" id="cell65" maxlength="1"></td>
+                <td><input type="text" id="cell66" maxlength="1"></td>
+                <td><input type="text" id="cell67" maxlength="1"></td>
+                <td><input type="text" id="cell68" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell70" maxlength="1"></td>
+                <td><input type="text" id="cell71" maxlength="1"></td>
+                <td><input type="text" id="cell72" maxlength="1"></td>
+                <td><input type="text" id="cell73" maxlength="1"></td>
+                <td><input type="text" id="cell74" maxlength="1"></td>
+                <td><input type="text" id="cell75" maxlength="1"></td>
+                <td><input type="text" id="cell76" maxlength="1"></td>
+                <td><input type="text" id="cell77" maxlength="1"></td>
+                <td><input type="text" id="cell78" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="cell80" maxlength="1"></td>
+                <td><input type="text" id="cell81" maxlength="1"></td>
+                <td><input type="text" id="cell82" maxlength="1"></td>
+                <td><input type="text" id="cell83" maxlength="1"></td>
+                <td><input type="text" id="cell84" maxlength="1"></td>
+                <td><input type="text" id="cell85" maxlength="1"></td>
+                <td><input type="text" id="cell86" maxlength="1"></td>
+                <td><input type="text" id="cell87" maxlength="1"></td>
+                <td><input type="text" id="cell88" maxlength="1"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="solveSudoku()">Solve</button>
+	 <button onclick="Clearall()">Clear</button>
+	 
+    <script>
+        function solveSudoku() {
+            // Create a 9x9 matrix for the Sudoku puzzle
+            var puzzle = [];
+            for (var i = 0; i < 9; i++) {
+                puzzle[i] = [];
+                for (var j = 0; j < 9; j++) {
+                    var cellId = "cell" + i + j;
+                    var cellValue = parseInt(document.getElementById(cellId).value) || 0;
+                    puzzle[i][j] = cellValue;
+                }
+            }
+
+            // Helper function to check if a number is valid in a particular position
+            function isValid(board, row, col, num) {
+                // Check if the number is already present in the row
+                for (var i = 0; i < 9; i++) {
+                    if (board[row][i] === num) {
+                        return false;
+                    }
+                }
+
+                // Check if the number is already present in the column
+                for (var i = 0; i < 9; i++) {
+                    if (board[i][col] === num) {
+                        return false;
+                    }
+                }
+
+                // Check if the number is already present in the 3x3 box
+                var startRow = Math.floor(row / 3) * 3;
+                var startCol = Math.floor(col / 3) * 3;
+                for (var i = 0; i < 3; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        if (board[startRow + i][startCol + j] === num) {
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            // Helper function to find an empty cell in the board
+            function findEmptyCell(board) {
+                for (var row = 0; row < 9; row++) {
+                    for (var col = 0; col < 9; col++) {
+                        if (board[row][col] === 0) {
+                            return [row, col];
+                        }
+                    }
+                }
+                return null;
+            }
+
+            // Main recursive function to solve the Sudoku puzzle using backtracking
+            function solve(board) {
+                // Find an empty cell
+                var emptyCell = findEmptyCell(board);
+                if (!emptyCell) {
+                    return true;  // All cells are filled, Sudoku solved
+                }
+
+                var row = emptyCell[0];
+                var col = emptyCell[1];
+
+                // Try numbers from 1 to 9
+                for (var num = 1; num <= 9; num++) {
+                    if (isValid(board, row, col, num)) {
+                        board[row][col] = num;
+
+                        // Recursively solve the Sudoku puzzle
+                        if (solve(board)) {
+                            return true;
+                        }
+
+                        // If the number doesn't lead to a solution, backtrack
+                        board[row][col] = 0;
+                    }
+                }
+
+                return false;  // No valid number found, backtrack
+            }
+
+            // Create a copy of the board to avoid modifying the original
+            var boardCopy = JSON.parse(JSON.stringify(puzzle));
+
+            // Call the recursive solve function
+            if (solve(boardCopy)) {
+                // Display the solved puzzle
+                displaySolution(boardCopy, puzzle);
+            } else {
+                alert("No solution found!");
+            }
+        }
+
+        function displaySolution(solution, board) {
+            var sudokuTable = document.getElementById("sudokuTable");
+
+            // Update the table with the solution
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    var cellId = "cell" + i + j;
+                    var cellValue = solution[i][j];
+					setTimeout(null, 20000); // No function provided
+                    document.getElementById(cellId).value = cellValue;
+					cellElement =document.getElementById(cellId);
+					    // Add custom font color and size for the newly added cell value
+					if(board[i][j] !==solution[i][j]){
+								if (cellValue !== 0) {
+										cellElement.style.color = "red"; // Set the font color to red
+										cellElement.style.fontSize = "20px"; // Set the font size to 16 pixels
+											}
+									}
+				}
+            }
+        }
+		
+		function Clearall(){
+		for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    var cellId = "cell" + i + j;
+                    document.getElementById(cellId).value = ' ';
+		}
+		}
+		}
+		
+// Function to generate a Sudoku puzzle
+function generateSudokuPuzzle() {
+    const puzzle = [];
+
+    // Initialize an empty 9x9 Sudoku grid
+    for (let i = 0; i < 9; i++) {
+        puzzle[i] = [];
+        for (let j = 0; j < 9; j++) {
+            puzzle[i][j] = 0;
+        }
+    }
+
+    // Generate a complete Sudoku puzzle
+    solveSudoku(puzzle);
+
+    // Remove some numbers to create the puzzle
+    const difficulty = 50; // Adjust the difficulty level as needed
+
+    // Count the number of non-zero cells
+    let nonZeroCount = 0;
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (puzzle[i][j] !== 0) {
+                nonZeroCount++;
+            }
+        }
+    }
+
+    // Check if there are enough non-zero cells to remove
+    if (nonZeroCount <= difficulty) {
+        throw new Error('Insufficient non-zero cells to create the puzzle.');
+    }
+
+    let count = 0;
+    while (count < difficulty) {
+        const row = Math.floor(Math.random() * 9);
+        const col = Math.floor(Math.random() * 9);
+        if (puzzle[row][col] !== 0) {
+            puzzle[row][col] = 0;
+            count++;
+        }
+    }
+
+    return puzzle;
+}
+
+
+
+        function displaypuzzle(puzzle) {
+            var sudokuTable = document.getElementById("sudokuTable");
+
+            // Update the table with the solution
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    var cellId = "cell" + i + j;
+                    var cellValue = solution[i][j];
+					setTimeout(null, 20000); // No function provided
+					if(cellValue==0){
+					document.getElementById(cellId).value = ' ';
+					} else {
+					document.getElementById(cellId).value = cellValue;
+					}
+                    document.getElementById(cellId).value = cellValue;
+					cellElement =document.getElementById(cellId);
+					    // Add custom font color and size for the newly added cell value
+					if(board[i][j] !==solution[i][j]){
+								if (cellValue !== 0) {
+										cellElement.style.color = "black"; // Set the font color to red
+										cellElement.style.fontSize = "20px"; // Set the font size to 16 pixels
+											}
+									}
+				}
+            }
+        }
+		
+// Function to solve the Sudoku puzzle for generating
+function solveSudokugen(board) {
+    // Helper function to check if a number is valid in a particular position
+    function isValid(board, row, col, num) {
+        // Check if the number is already present in the row
+        for (let i = 0; i < 9; i++) {
+            if (board[row][i] === num) {
+                return false;
+            }
+        }
+
+        // Check if the number is already present in the column
+        for (let i = 0; i < 9; i++) {
+            if (board[i][col] === num) {
+                return false;
+            }
+        }
+
+        // Check if the number is already present in the 3x3 box
+        const startRow = Math.floor(row / 3) * 3;
+        const startCol = Math.floor(col / 3) * 3;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (board[startRow + i][startCol + j] === num) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // Helper function to find an empty cell in the board
+    function findEmptyCell(board) {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (board[row][col] === 0) {
+                    return [row, col];
+                }
+            }
+        }
+        return null;
+    }
+
+    // Main recursive function to solve the Sudoku puzzle using backtracking
+    function solve(board) {
+        const emptyCell = findEmptyCell(board);
+        if (!emptyCell) {
+            return true;  // All cells are filled, Sudoku solved
+        }
+
+        const [row, col] = emptyCell;
+
+        // Try numbers from 1 to 9
+        for (let num = 1; num <= 9; num++) {
+            if (isValid(board, row, col, num)) {
+                board[row][col] = num;
+
+                // Recursively solve the Sudoku puzzle
+                if (solve(board)) {
+                    return true;
+                }
+
+                // If the number doesn't lead to a solution, backtrack
+                board[row][col] = 0;
+            }
+        }
+
+        return false;  // No valid number found, backtrack
+    }
+
+    // Call the recursive solve function
+    solve(board);
+}
+
+    </script>
+</body>
+</html>
